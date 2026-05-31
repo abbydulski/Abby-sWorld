@@ -24,18 +24,7 @@ import type { Note } from './types/note'
 const queryClient = new QueryClient()
 
 function AppRoutes() {
-  const { token, userInfo, signIn, signOut, silentLoading } = useGoogleAuth()
-
-  if (silentLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-bg">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-5 h-0.5 bg-primary animate-pulse" />
-          <span className="text-xs text-text-tertiary font-mono">signing in...</span>
-        </div>
-      </div>
-    )
-  }
+  const { token, userInfo, signIn, signOut } = useGoogleAuth()
   const { notes, create: createNote } = useNotes()
   const { events: manualEvents } = useManualEvents()
   const { data: googleEvents = [] } = useGoogleCalendar(token)
