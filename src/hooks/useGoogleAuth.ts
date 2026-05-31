@@ -59,6 +59,9 @@ export function useGoogleAuth() {
   useEffect(() => {
     if (localStorage.getItem(HAS_SIGNED_IN_KEY) === 'true') {
       silentSignIn()
+      // If silent auth doesn't resolve in 4s, stop blocking the UI
+      const timeout = setTimeout(() => setSilentLoading(false), 4000)
+      return () => clearTimeout(timeout)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
